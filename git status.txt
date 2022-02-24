@@ -1,0 +1,4 @@
+git status
+git add .
+git commit -m "any message"
+git push "and link of repository( we will get it when we click code on the github"

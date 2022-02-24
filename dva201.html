@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+<body>
+
+  <style> 
+.dot { 
+  border: 1px solid blue; 
+  fill: lightblue; 
+  stroke: purple; 
+  -webkit-transform: scale(1); 
+  -webkit-transform-origin: 50% 50%; 
+  transform: scale(1); 
+  transform-origin: 50% 50%; 
+} 
+ 
+.dot:hover 
+{ 
+  -webkit-animation-name: pulsar; 
+  -webkit-animation-duration: 0.2s; 
+  -webkit-animation-iteration-count: infinite; 
+  -webkit-animation-direction: alternate; 
+  animation-name: pulsar; 
+  animation-duration: 0.2s; 
+  animation-iteration-count: infinite; 
+  animation-direction: alternate; 
+  -webkit-transform-origin: 50% 50%; 
+  transform-origin: 50% 50%;  
+} 
+ 
+@keyframes pulsar { 
+  from { 
+      fill: red; 
+  } 
+  to { 
+      fill: red; 
+      transform: scale(1.3,1.3); 
+      transform-origin: 50% 50%; 
+  } 
+} 
+</style> 
+ 
+<svg class='dot' width='400' height='350'></svg>
+
+
+<svg width="500" height="400"></svg>
+<script>
+        // points
+        var dataset1 = [
+            [0,0], [15,15], [35,45],
+            [35, 70], [55, 100],[65, 115], [73, 130],
+            [78, 120], [89, 138], [100, 140]
+        ];
+
+        // margin
+        var svg = d3.select("svg"),
+            margin = 200,
+            width = svg.attr("width") - margin, //width 500- margin 300
+            height = svg.attr("height") - margin //height400- margin 200
+
+        // set scale
+        var xScale = d3.scaleLinear().domain([0, 100]).range([0, width]),
+            yScale = d3.scaleLinear().domain([0, 200]).range([height, 0]);
+            
+             var g = svg.append("g")
+            .attr("transform", "translate(" + 100 + "," + 100 + ")");
+       
+        // to get x axis at the bottom
+        g.append("g")
+         .attr("transform", "translate(0," + height + ")")
+         .call(d3.axisBottom(xScale));
+        
+        // to get y axis at the left
+        g.append("g")
+         .call(d3.axisLeft(yScale));
+        
+        // to get dots in the specifie points
+        
+        svg.append('g') // group it
+        .selectAll("dot")
+        .data(dataset1)
+        .enter()
+        .append("circle")
+        .attr("cx", function (d) { return xScale(d[0]); } )  //cx= x axis point
+        .attr("cy", function (d) { return yScale(d[1]); } )  //cy= y axis popint
+        .attr("r", 3)
+        .attr("transform", "translate(" + 100 + "," + 100 + ")")
+        .style("fill", "#ee00aa"); // color of dots
+        
+            // to get line through the specified points 
+            
+        var line = d3.line()
+        .x(function(d) { return xScale(d[0]); }) 
+        .y(function(d) { return yScale(d[1]); }) 
+        .curve(d3.curveMonotoneX)
+        
+        svg.append("path")
+        .datum(dataset1) 
+        .attr("class", "line") 
+        .attr("transform", "translate(" + 100 + "," + 100 + ")") // position of line
+        .attr("d", line)
+        .style("fill", "none")
+        .style("stroke", "#88a6ff")  //line color
+        .style("stroke-width", "3");  // line width
+        
+</script>
+</body>
+</html>

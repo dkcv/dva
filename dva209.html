@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<script type='text/javascript' src='https://d3js.org/d3.v7.min.js'></script> 
+ </head>
+ <body>
+<script> 
+var first= d3.select("body")
+d3.select('body') 
+  .append("div") 
+  .style('width',  '100px') 
+  .style('height', '100px')  
+  .style('background-color', 'blue') 
+  .style('transform', 'scale(1.0)') 
+  .transition() 
+  .ease( d3.easeBounce ) 
+  .duration(1000) 
+  .style("background-color", "red") 
+  .style('transform', 'scale(0.5)')
+
+var second= d3.select("body")
+  d3.select('body') 
+  .append("div") 
+  .style('width',  '150px') 
+  .style('height', '150px')  
+  .style('background-color', 'blue') 
+  .style('transform', 'scale(1.0)') 
+  .transition() 
+  .ease( d3.easeExpInOut ) 
+  .duration(1000) 
+  .style("background-color", "black") 
+  .style('transform', 'scale(0.5)')
+
+var third= d3.select("body")
+  d3.select('body') 
+  .append("div") 
+  .style('width',  '175px') 
+  .style('height', '150px')  
+  .style('background-color', 'blue') 
+  .style('transform', 'scale(1.0)') 
+  .transition() 
+  .ease( d3.easeCircleOut ) 
+  .duration(1000) 
+  .style("background-color", "orange") 
+  .style('transform', 'scale(0.5)');
+
+</script> 
+</body>
+</html>

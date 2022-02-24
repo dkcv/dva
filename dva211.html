@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<script type='text/javascript' src='https://d3js.org/d3.v7.min.js'></script> 
+</head>
+<body>
+    <script>
+    var svg = d3.select("body")
+                    .append('svg') 
+                    .style("height",'1000px')
+                    .style("width",'1000px')
+
+    var mytext = svg.append("text") 
+                        .attr("x", '20')
+                        .attr( "y", '20')
+                        .text("HELLO")
+                        .style("font-size", '25')
+    
+    mytext
+    .on("mouseover", function(){ 
+          d3.select(this) 
+            .transition() 
+            .ease( d3.easeBounce )
+            .style("fill", "orange")
+            .attr("x", '50')
+            .attr( "y", '50')
+            .style("font-size",'50')
+
+            console.log(event)
+
+    
+      })
+
+      .on("mouseout", function(){ 
+          d3.select(this) 
+            .style("fill", "steelblue") 
+            .attr("x", '20')
+            .attr( "y", '20')
+            .style("font-size",'25')
+
+      }); 
+
+
+</script>
+</body>
+</html>
